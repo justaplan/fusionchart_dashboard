@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FC-python wrapper</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static "fusioncharts/fusioncharts.js" %}"></script>
+    <script type="text/javascript" src="{% static "fusioncharts/fusioncharts.charts.js" %}"></script>
+    <script type="text/javascript" src="{% static "fusioncharts/themes/fusioncharts.theme.fusion.js" %}"></script>
+    <script src="{% static "fusioncharts/fusioncharts.maps.js" %}"></script>
+    <script src="{% static "maps/fusioncharts/fusioncharts.world.js" %}"></script>
+    <script src="{% static "maps/fusioncharts/fusioncharts.california.js" %}"></script>
+    <script src="{% static "maps/fusioncharts/fusioncharts.malaysia.js" %}"></script>
+
+    <body>
+
+            <div style="display:inline-block" id="myFirstchart-container">{{ output|safe }}</div>
+
+
+
+            <div style="display:inline-block" id="mySecondchart-container">{{ output2|safe }}</div>
+
+
+    </body>
+        
+</html>
