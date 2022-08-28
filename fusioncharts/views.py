@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from collections import OrderedDict
+from django.views.generic import ListView
 # Include the `fusioncharts.py` file that contains functions to embed the charts.
 
 from .fusioncharts import FusionCharts
 import pandas as pd
+from .models import Person
 
 
 # Pandas function to get the csv value
@@ -33,6 +35,9 @@ x2 =  [value for value in df_companies_state_id["total_companies"]]
 x3 = [value for value in df_companies_state_id["value_label"]]
 
 mapArray = list(map(list,zip(x,x2,x3)))
+
+# Pandas function generate list for html table
+df.rename(columns = {'Unnamed: 0':'company_id'}, inplace = True)
 
 
 def myFirstChart(request):
@@ -120,3 +125,20 @@ def myFirstChart(request):
         'output': column2D.render(),
         'output2': fusionMap.render()
 })
+
+def table_page(request):
+    company_id = df["company_id"].tolist()
+    company_name = df["company_name"].tolist()
+    company_rating = df["company_rating"].tolist()
+    salary_rate = df["salary_rate"].tolist()
+    recommendation_rate = df["recommendation_rate"].tolist()
+    company_benefit = df["company_benefit"].tolist()
+
+    context = {'LUnique': zip(company_id, company_name, company_rating, salary_rate, recommendation_rate, company_benefit)}
+
+
+    return render(request, "table.html", context=context)
+
+class PersonListView(ListView):
+    model = Person
+    template_name = '/Users/nickytan/Documents/FS_Data_Science/FusionChartsProject/fusioncharts/templates/people.html'

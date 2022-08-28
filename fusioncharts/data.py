@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from collections import OrderedDict
+import sqlite3
 
 
 ## For Bar Char
@@ -29,4 +30,19 @@ x3 = [value for value in df_companies_state_id["value_label"]]
 
 mapDataArray = list(map(list,zip(x,x2,x3)))
 
-print(mapDataArray)
+
+## Create data to database
+df.rename(columns = {'Unnamed: 0':'company_id'}, inplace = True)
+
+
+
+## Convert dataframe to sqlite database
+# database = "/Users/nickytan/Documents/FS_Data_Science/FusionChartsProject/db.sqlite3"
+# conn = sqlite3.connect(database)
+
+# df.to_sql(name='jobstreet_data', con=conn, index=False)
+
+# conn.close()
+
+print(df["company_id"].tolist())
+
